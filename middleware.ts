@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "@/lib/auth";
+import { verifyEdgeToken } from "@/lib/auth-edge";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
-  const protectedRoutes = ["/dashboard", "/admin"];
-  const adminRoutes = ["/admin"];
+  const pathname = req.nextUrl.pathname;
 
-  const isProtected = protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route));
-  if (!isProtected) {
+  const isDashboardRoute = pathname.startsWith("/dashboard");
+  const isAdminRoute = pathname.startsWith("/admin");
+
+  if (!isDashboardRoute && !isAdminRoute) {
     return NextResponse.next();
   }
 
@@ -16,9 +17,9 @@ export async function middleware(req: NextRequest) {
   }
 
   try {
-    const payload = await verifyToken(token);
+    const user = await verifyEdgeToken(token);
 
-    if (adminRoutes.some((route) => req.nextUrl.pathname.startsWith(route)) && payload.role !== "admin") {
+    if (isAdminRoute && user.role !== "admin") {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
