@@ -1,0 +1,16 @@
+{
+  "/login/page": "app/login/page.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/page": "app/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/api/subscriptions/me/route": "app/api/subscriptions/me/route.js",
+  "/api/scores/route": "app/api/scores/route.js",
+  "/api/charities/route": "app/api/charities/route.js",
+  "/api/me/route": "app/api/me/route.js",
+  "/api/winners/my/route": "app/api/winners/my/route.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/api/subscriptions/create-checkout/route": "app/api/subscriptions/create-checkout/route.js",
+  "/api/draws/current/route": "app/api/draws/current/route.js",
+  "/admin/page": "app/admin/page.js",
+  "/api/admin/stats/route": "app/api/admin/stats/route.js"
+}
